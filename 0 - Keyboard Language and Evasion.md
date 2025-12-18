@@ -99,13 +99,13 @@ cd /opt/cobaltstrike/profiles
 ```c
 stage {
    set userwx "false";
-   set module_x64 "Hydrogen.dll";  
+   set module_x64 "wwanmm.dll";  
    set copy_pe_header "false";
 }
 
 post-ex {
 	set amsi_disable "true";
-	set spawnto_x64 "%windir%\\sysnative\\svchost.exe";
+	set spawnto_x64 "%windir%\\sysnative\\RuntimeBroker.exe";
 	set obfuscate "true";
 	set pipename "TSVCPIPE-########-####-####-####-###############";
 	set cleanup "true";
@@ -121,9 +121,8 @@ post-ex {
 process-inject {
 	   execute {
 	      NtQueueApcThread-s;
-	      NtQueueApcThread;
 	      SetThreadContext;
-	      RtlCreateUserThread;
+          CreateThread "ntdll!RtlUserThreadStart";
 	      CreateThread;
 	   }
 	}
